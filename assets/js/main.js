@@ -10,7 +10,16 @@ console.log(now);
 
 let endCountdown = new Date(now);
 
-calculatingTime(now, endCountdown);
+let countdownEl = document.getElementById('countdown');
+
+//aggiorna countdown ogni secondo
+setInterval(updateCountdown(calculatingTime(now, endCountdown)), 1000);
+
+updateCountdown(calculatingTime(now, endCountdown));
+
+//countdownEl.innerHTML = calculatingTime(now, endCountdown); <-- sbagliato, mostra solo l'ultimo valore e non si aggiorna automaticamente
+
+/* ############### FUNCTIONS ############### */
 
 //funzione per calcolare il tempo rimanente fino alle 9:30 di domani mattina
 function calculatingTime(firstDate, secondDate) {
@@ -25,15 +34,28 @@ function calculatingTime(firstDate, secondDate) {
     console.log(remainingTime); //in millisecondi
     console.log(remainingTime / 1000); //in secondi
 
+    
+    return remainingTime;
+}
+
+//funzione per aggiornare il countdown
+function  updateCountdown(functionCountdown) {
+    
+    const updateRemainingTime = functionCountdown;
+    
     //secondi
-    const seconds = Math.floor((remainingTime % 60000) / 1000);
+    const seconds = Math.floor((calculatingTime(now, endCountdown) % 60000) / 1000);
     console.log(seconds);
     //minuti
-    const minutes = Math.floor((remainingTime % 3600000) / 60000);
+    const minutes = Math.floor((calculatingTime(now, endCountdown) % 3600000) / 60000);
     console.log(minutes);
     //ore
-    const hours = Math.floor(remainingTime / 3600000);
+    const hours = Math.floor(calculatingTime(now, endCountdown) / 3600000);
     console.log(hours);
 
-    return seconds, minutes, hours;
+    if (hours <= 0 && minutes <= 0 && seconds <= 0){
+        countdownEl.innerHTML = 'LEZIONE INIZIATA!!!';
+    } else {
+        countdownEl.innerHTML = `Tempo rimanente = ${hours}:${minutes}:${seconds}`;
+    }
 }
