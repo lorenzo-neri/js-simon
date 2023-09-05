@@ -12,8 +12,13 @@ let endCountdown = new Date(now);
 
 let countdownEl = document.getElementById('countdown');
 
+
+
 //aggiorna countdown ogni secondo
-setInterval(updateCountdown(calculatingTime(now, endCountdown)), 1000);
+//setInterval(updateCountdown(calculatingTime(now, endCountdown)), 1000);
+setInterval(() => {
+    updateCountdown(calculatingTime(now, endCountdown));
+}, 1000);
 
 updateCountdown(calculatingTime(now, endCountdown));
 
@@ -27,33 +32,36 @@ function calculatingTime(firstDate, secondDate) {
     secondDate.setDate(firstDate.getDate() + 1);
     //setto l'orario
     secondDate.setHours(9, 30, 0, 0);
-    console.log(secondDate);
+    //console.log(secondDate);
 
     //faccio la differenza tra la data di oggi e quella di domani
     const remainingTime = secondDate - firstDate;
-    console.log(remainingTime); //in millisecondi
-    console.log(remainingTime / 1000); //in secondi
+    //console.log(remainingTime); //in millisecondi
+    //console.log(remainingTime / 1000); //in secondi
 
-    
+
     return remainingTime;
 }
 
 //funzione per aggiornare il countdown
-function  updateCountdown(functionCountdown) {
-    
-    const updateRemainingTime = functionCountdown;
-    
-    //secondi
-    const seconds = Math.floor((calculatingTime(now, endCountdown) % 60000) / 1000);
-    console.log(seconds);
-    //minuti
-    const minutes = Math.floor((calculatingTime(now, endCountdown) % 3600000) / 60000);
-    console.log(minutes);
-    //ore
-    const hours = Math.floor(calculatingTime(now, endCountdown) / 3600000);
-    console.log(hours);
+function updateCountdown(functionCountdown) {
 
-    if (hours <= 0 && minutes <= 0 && seconds <= 0){
+    let now = new Date();
+    //const updateRemainingTime = functionCountdown;
+
+    //secondi
+    let seconds = Math.floor((functionCountdown % 60000) / 1000);
+    //console.log(seconds);
+    //minuti
+    let minutes = Math.floor((functionCountdown % 3600000) / 60000);
+    //console.log(minutes);
+    //ore
+    let hours = Math.floor(functionCountdown / 3600000);
+
+    //console.log(hours);
+
+
+    if (hours <= 0 && minutes <= 0 && seconds <= 0) {
         countdownEl.innerHTML = 'LEZIONE INIZIATA!!!';
     } else {
         countdownEl.innerHTML = `Tempo rimanente = ${hours}:${minutes}:${seconds}`;
