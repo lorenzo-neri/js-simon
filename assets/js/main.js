@@ -10,18 +10,18 @@ console.log(now);
 
 let endCountdown = new Date(now);
 
-calculatingTime()
+calculatingTime(now, endCountdown);
 
 //funzione per calcolare il tempo rimanente fino alle 9:30 di domani mattina
-function calculatingTime() {
+function calculatingTime(firstDate, secondDate) {
     //aggiungo un giorno a oggi
-    endCountdown.setDate(now.getDate() + 1);
+    secondDate.setDate(firstDate.getDate() + 1);
     //setto l'orario
-    endCountdown.setHours(9, 30, 0, 0);
-    console.log(endCountdown);
+    secondDate.setHours(9, 30, 0, 0);
+    console.log(secondDate);
 
     //faccio la differenza tra la data di oggi e quella di domani
-    const remainingTime = endCountdown - now;
+    const remainingTime = secondDate - firstDate;
     console.log(remainingTime); //in millisecondi
     console.log(remainingTime / 1000); //in secondi
 
