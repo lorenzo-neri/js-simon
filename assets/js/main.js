@@ -46,7 +46,6 @@ function calculatingTime(firstDate, secondDate) {
 //funzione per aggiornare il countdown
 function updateCountdown(functionCountdown) {
 
-    let now = new Date();
     //const updateRemainingTime = functionCountdown;
 
     //secondi
